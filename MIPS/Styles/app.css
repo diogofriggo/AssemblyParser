@@ -1,0 +1,92 @@
+* {
+    box-sizing: border-box;      
+}
+
+body {
+	background: url(http://subtlepatterns.subtlepatterns.netdna-cdn.com/patterns/low_contrast_linen.png);
+    font-family: Monaco, Menlo,"Andale Mono","lucida console","Courier New",monospace;
+}
+
+#content {
+	margin: auto;
+	margin-top: 10%;
+	width: 80%;
+}
+
+.footer {
+	clear: both;
+}
+
+.CodeMirror {
+    border-radius: 5px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 2), 0 0 15px rgba(0, 0, 0, 2);
+}
+
+.CodeMirror-scroll {
+  height: 500px;
+}
+
+.CodeMirror-focused div.CodeMirror-selected {
+     background: #414141;
+}
+
+.cm-s-ambiance .CodeMirror-gutter .CodeMirror-gutter-text {
+    color: #BBBBBB;
+}
+
+.input, .output {
+	float: left;
+	width: 50%;
+}
+
+.input {
+}
+
+.output {
+    font-family: 'ratio-n5','ratio','Helvetica Neue',Arial,sans-serif;
+    box-shadow: 0 0 10px black inset, 0 0 15px rgba(0, 0, 0, 3), 0 0 15px rgba(0, 0, 0, 3);
+    border-radius: 5px;
+    height: 500px;
+}
+
+.output table{
+    margin: auto;
+    width: 90%;
+}
+
+.output table tr {
+    text-align: center;
+    line-height: 1;
+}
+
+.code {
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: 2px;
+    height: 31px;
+}
+
+.code td {    
+    border: 1px solid white;
+    padding: 1px;
+}
+
+.captions, .bits {    
+    color: white;
+    font-size: 12px;
+}
+
+.bits td, .captions td{
+    padding: 0;
+    height: 12px;
+}
+
+.output hr {
+    margin: 0;   
+    padding: 0;
+}
+
+.CodeMirror-scroll.cm-s-ambiance {
+    line-height: 45px;
+}

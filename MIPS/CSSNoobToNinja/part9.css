@@ -1,0 +1,8 @@
+#box {
+    margin: auto;    
+    width: 500px;
+    height: 500px;
+    background: #666;
+    border-radius: 155px;
+    box-shadow: 20px 30px 40px 50px #292929;
+}

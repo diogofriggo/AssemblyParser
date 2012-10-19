@@ -1,0 +1,22 @@
+C:\Users\dfriggo\Documents\Visual Studio 2010\Projects\MIPS\MIPS\bin\MIPS.dll
+C:\Users\dfriggo\Documents\Visual Studio 2010\Projects\MIPS\MIPS\bin\MIPS.pdb
+C:\Users\dfriggo\Documents\Visual Studio 2010\Projects\MIPS\MIPS\bin\System.Web.Mvc.dll
+C:\Users\dfriggo\Documents\Visual Studio 2010\Projects\MIPS\MIPS\bin\System.Web.WebPages.dll
+C:\Users\dfriggo\Documents\Visual Studio 2010\Projects\MIPS\MIPS\bin\System.Web.Mvc.xml
+C:\Users\dfriggo\Documents\Visual Studio 2010\Projects\MIPS\MIPS\bin\System.Web.WebPages.xml
+C:\Users\dfriggo\Documents\Visual Studio 2010\Projects\MIPS\MIPS\bin\pt-br\System.Web.Mvc.resources.dll
+C:\Users\dfriggo\Documents\Visual Studio 2010\Projects\MIPS\MIPS\bin\pt-br\System.Web.WebPages.resources.dll
+C:\Users\dfriggo\Documents\Visual Studio 2010\Projects\MIPS\MIPS\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\dfriggo\Documents\Visual Studio 2010\Projects\MIPS\MIPS\obj\Debug\MIPS.dll
+C:\Users\dfriggo\Documents\Visual Studio 2010\Projects\MIPS\MIPS\obj\Debug\MIPS.pdb
+E:\MIPS\MIPS\bin\MIPS.dll
+E:\MIPS\MIPS\bin\MIPS.pdb
+E:\MIPS\MIPS\bin\System.Web.Mvc.dll
+E:\MIPS\MIPS\bin\System.Web.WebPages.dll
+E:\MIPS\MIPS\bin\System.Web.Mvc.xml
+E:\MIPS\MIPS\bin\System.Web.WebPages.xml
+E:\MIPS\MIPS\bin\pt-br\System.Web.Mvc.resources.dll
+E:\MIPS\MIPS\bin\pt-br\System.Web.WebPages.resources.dll
+E:\MIPS\MIPS\obj\Debug\ResolveAssemblyReference.cache
+E:\MIPS\MIPS\obj\Debug\MIPS.dll
+E:\MIPS\MIPS\obj\Debug\MIPS.pdb

@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>MIPS</title>
+        <link href="../../Styles/codemirror.css" rel="stylesheet" />
+        <link href="../../Styles/ambiance.css" rel="stylesheet" />
+        <link href="../../Styles/app.css" rel="stylesheet" />
+        <script src="../../Scripts/jquery-1.8.2.js" type="text/javascript"></script>
+        <script src="../../Scripts/underscore.js" type="text/javascript"></script>
+        <script src="../../Scripts/knockout-2.1.0.debug.js" type="text/javascript"></script>
+        <script src="../../Scripts/codemirror.js" type="text/javascript"></script>
+        <script src="../../Scripts/assembly.js" type="text/javascript"></script>
+        <script src="../../Scripts/app.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <div id="content">
+            <div class="input">
+                <textarea id="view" rows="0" cols="0">add $t0, $t1, $t2</textarea>
+            </div>
+            
+            <div class="output cm-s-ambiance">
+                <table>
+                    <!--template for r-type command-->
+                    <tbody data-bind="foreach: commands">
+                        <tr data-bind="visible: funct" class="captions">
+                            <td>op</td>
+                            <td>rs</td>
+                            <td>rt</td>
+                            <td>rd</td>
+                            <td>shamt</td>
+                            <td>funct</td>
+                        </tr>
+                        <tr data-bind="visible: funct" class="code">
+                            <td data-bind="text: op"></td>
+                            <td data-bind="text: rs"></td>
+                            <td data-bind="text: rt"></td>
+                            <td data-bind="text: rd"></td>
+                            <td data-bind="text: shamt"></td>
+                            <td data-bind="text: funct"></td>
+                        </tr>
+                        @*<tr class="bits">
+                        <td>6 bits</td>
+                        <td>5 bits</td>
+                        <td>5 bits</td>
+                        <td>5 bits</td>
+                        <td>5 bits</td>
+                        <td>6 bits</td>
+                    </tr>*@
+                        @*                        <tr><td colspan="6"><hr /></td></tr>*@
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
+
