@@ -47,56 +47,131 @@ var registers = {
 	$ra: '11111'
 };
 	
-function validate(input) {
-	return true;
+var types = {
+	and: 'rtype',
+	or: 'rtype',
+	add: 'rtype',
+	sub: 'rtype',
+	addi: 'itype',
+	andi: 'itype',
+	ori: 'itype',
+	j: 'jtype',
+	beq: 'jtype',
+	bne: 'jtype'
+};
+
+var parsers = {
+	rtype: parseRTypeCommand,
+	itype: parseITypeCommand,
+	jtype: parseJTypeCommand
+};
+
+function parseCommand(input) {
+	var tokens = input.trim().split( /\s|,\s?/ );
+	var funct = _.first(tokens);
+	var type = types[funct];
+	var code = {};
+	
+	if (funct) {
+		code = parsers[type](tokens);
+		code.type = type;
+	}
+	
+	return code;
 }
 
-function parse(input) {
+function parseRTypeCommand(tokens) {
 	var code = {
+		funct: functions[_.first(tokens)],
 		op: '000000',
 		shamt: '00000'
 	};
 	
-	var parts = input.trim().split( /\s|,\s?/ );
-
-	if (!functions[_.first(parts)]) return code;
-
-	_.each(parts, function(part) {
-		if (functions[part]) {
-			code.funct = functions[part];
-		}
-
-		if (registers[part]) {
+	_.chain(tokens).tail().each(function(token) {
+		if (registers[token]) {
 			if (code.rd) {
 				if (code.rs) {
-					code.rt = registers[part];
+					if(code.rt) {
+						console.error('Tried to reset code.rt for R-type');
+					}
+					else {
+						code.rt = registers[token];
+					}
 				} else {
-					code.rs = registers[part];
+					code.rs = registers[token];
 				}
 			} else {
-				code.rd = registers[part];
+				code.rd = registers[token];
 			}
 		}
 	});
-
+	
 	return code;
+}
+
+var MAX_16_BIT_UNSIGNED_VALUE = 32767;
+var MAX_16_BIT_SIGNED_VALUE = -32768;
+	
+function parseITypeCommand(tokens) {
+	var code = {
+		op: functions[_.first(tokens)]
+	};
+
+	_.chain(tokens).tail().each(function(token) {
+		if (registers[token]) {
+			if (code.rs) {
+				if (code.rt) {
+					console.error('Tried to reset code.rt for I-type');
+				} else {
+					code.rt = registers[token];
+				}
+			} else {
+				code.rs = registers[token];
+			}
+		}
+		
+		if(code.rs && code.rt) {
+			var immediate = parseInt(token);
+			if(_.isNumber(immediate) && immediate >= MAX_16_BIT_SIGNED_VALUE && immediate <= MAX_16_BIT_UNSIGNED_VALUE) {
+				if(code.imm) {
+					console.error('Tried to reset code.imm for I-type');
+				}
+				else {
+					code.imm = immediate;
+				}
+			}
+		}
+	});
+	
+	return code;
+}
+
+function parseJTypeCommand(tokens) {
+	return {
+		op: functions[_.first(tokens)],
+		addr: _.chain(tokens).tail().first()
+	};
 }
 
 $(function() {
 	var Command = function(command){
-		this.op = ko.observable(command.op);
-		this.rs = ko.observable(command.rs);
-		this.rt = ko.observable(command.rt);
-		this.rd = ko.observable(command.rd);
-		this.shamt = ko.observable(command.shamt);
-		this.funct = ko.observable(command.funct);
+		var self = this;
+		self.op = ko.observable(command.op);
+		self.rs = ko.observable(command.rs);
+		self.rt = ko.observable(command.rt);
+		self.rd = ko.observable(command.rd);
+		self.shamt = ko.observable(command.shamt);
+		self.funct = ko.observable(command.funct);
+		self.imm = ko.observable(command.imm);
+		self.addr = ko.observable(command.addr);
+		self.type = ko.observable(command.type);
 	};
 
 	var CommandsViewModel = {
 		commands: ko.observableArray()
 	};
 	
-	CodeMirror.fromTextArea($("#view")[0], {
+	var editor = CodeMirror.fromTextArea($("#view")[0], {
 		theme: 'ambiance',
 		lineNumbers: true,
 		onChange: function(editor){
@@ -106,7 +181,7 @@ $(function() {
 			//add/update
 			_.each(lines, function(line, i) {
 				var command = commands()[i];
-				var newCommand = parse(line);
+				var newCommand = parseCommand(line);
 				
 				if(i >= commands().length) {
 					CommandsViewModel.commands.push(new Command(newCommand));
@@ -118,6 +193,9 @@ $(function() {
 					command.rd(newCommand.rd);
 					command.shamt(newCommand.shamt);
 					command.funct(newCommand.funct);
+					command.imm(newCommand.imm);
+					command.addr(newCommand.addr);
+					command.type(newCommand.type);
 				}
 			});
 			
@@ -129,6 +207,8 @@ $(function() {
 			}
 		}
 	});
-
+	
 	ko.applyBindings(CommandsViewModel);
+	
+	editor.setValue(editor.getValue());
 });

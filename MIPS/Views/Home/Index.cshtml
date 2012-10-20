@@ -15,14 +15,16 @@
     <body>
         <div id="content">
             <div class="input">
-                <textarea id="view" rows="0" cols="0">add $t0, $t1, $t2</textarea>
+                <textarea id="view" rows="0" cols="0">add $t0, $t1, $t2
+addi $t0, $t1, -32768
+ori $t0, $t1, 32767</textarea>
             </div>
             
             <div class="output cm-s-ambiance">
                 <table>
-                    <!--template for r-type command-->
                     <tbody data-bind="foreach: commands">
-                        <tr data-bind="visible: funct" class="captions">
+                        <!--template for r-type commands-->
+                        <tr data-bind="visible: type() === 'rtype'" class="captions">
                             <td>op</td>
                             <td>rs</td>
                             <td>rt</td>
@@ -30,7 +32,7 @@
                             <td>shamt</td>
                             <td>funct</td>
                         </tr>
-                        <tr data-bind="visible: funct" class="code">
+                        <tr data-bind="visible: type() === 'rtype'" class="code">
                             <td data-bind="text: op"></td>
                             <td data-bind="text: rs"></td>
                             <td data-bind="text: rt"></td>
@@ -38,15 +40,28 @@
                             <td data-bind="text: shamt"></td>
                             <td data-bind="text: funct"></td>
                         </tr>
-                        @*<tr class="bits">
-                        <td>6 bits</td>
-                        <td>5 bits</td>
-                        <td>5 bits</td>
-                        <td>5 bits</td>
-                        <td>5 bits</td>
-                        <td>6 bits</td>
-                    </tr>*@
-                        @*                        <tr><td colspan="6"><hr /></td></tr>*@
+                        <!--template for i-type commands-->
+                        <tr data-bind="visible: type() === 'itype'" class="captions">
+                            <td>op</td>
+                            <td>rs</td>
+                            <td>rt</td>
+                            <td colspan="3">imm</td>
+                        </tr>
+                        <tr data-bind="visible: type() === 'itype'" class="code">
+                            <td data-bind="text: op"></td>
+                            <td data-bind="text: rs"></td>
+                            <td data-bind="text: rt"></td>
+                            <td data-bind="text: imm" colspan="3"></td>
+                        </tr>
+                        <!--template for j-type commands-->
+                        <tr data-bind="visible: type() === 'jtype'" class="captions">
+                            <td>op</td>
+                            <td colspan="5">addr</td>
+                        </tr>
+                        <tr data-bind="visible: type() === 'jtype'" class="code">
+                            <td data-bind="text: op"></td>
+                            <td data-bind="text: addr" colspan="5"></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
