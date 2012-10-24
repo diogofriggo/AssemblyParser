@@ -69,6 +69,7 @@
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\codemirror.js" />
     <Content Include="Scripts\codemirror\.gitignore" />
+    <Content Include="Scripts\assembly.js" />
     <Content Include="Scripts\codemirror\demo\activeline.html" />
     <Content Include="Scripts\codemirror\demo\changemode.html" />
     <Content Include="Scripts\codemirror\demo\closetag.html" />
@@ -264,7 +265,7 @@
     <Content Include="Scripts\codemirror\theme\rubyblue.css" />
     <Content Include="Scripts\codemirror\theme\vibrant-ink.css" />
     <Content Include="Scripts\codemirror\theme\xq-dark.css" />
-    <Content Include="Scripts\assembly.js" />
+    <Content Include="Scripts\jquery.ba-resize.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\underscore.js" />

@@ -72,7 +72,7 @@ function parseCommand(input) {
 	var type = types[funct];
 	var code = {};
 	
-	if (funct) {
+	if (type) {
 		code = parsers[type](tokens);
 		code.type = type;
 	}
@@ -165,6 +165,10 @@ $(function() {
 		self.imm = ko.observable(command.imm);
 		self.addr = ko.observable(command.addr);
 		self.type = ko.observable(command.type);
+		self.isRType = ko.computed(function() { return this.type() === 'rtype'; }, this);
+		self.isIType = ko.computed(function() { return this.type() === 'itype'; }, this);
+		self.isJType = ko.computed(function() { return this.type() === 'jtype'; }, this);
+		self.isEmpty = ko.computed(function() { return !this.op(); }, this);
 	};
 
 	var CommandsViewModel = {
@@ -211,4 +215,13 @@ $(function() {
 	ko.applyBindings(CommandsViewModel);
 	
 	editor.setValue(editor.getValue());
+	
+	$('.CodeMirror-scroll>div:last-child').resize(function(){
+		$('.scroll .inner').height($(this).height());
+	});
+
+	$('.scroll').scroll(function(){
+		$('.CodeMirror-scroll').scrollTop($(this).scrollTop());
+		$('.output').scrollTop($(this).scrollTop());
+	});
 });

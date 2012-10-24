@@ -6,6 +6,7 @@
         <link href="../../Styles/ambiance.css" rel="stylesheet" />
         <link href="../../Styles/app.css" rel="stylesheet" />
         <script src="../../Scripts/jquery-1.8.2.js" type="text/javascript"></script>
+        <script src="../../Scripts/jquery.ba-resize.js" type="text/javascript"></script>
         <script src="../../Scripts/underscore.js" type="text/javascript"></script>
         <script src="../../Scripts/knockout-2.1.0.debug.js" type="text/javascript"></script>
         <script src="../../Scripts/codemirror.js" type="text/javascript"></script>
@@ -17,14 +18,25 @@
             <div class="input">
                 <textarea id="view" rows="0" cols="0">add $t0, $t1, $t2
 addi $t0, $t1, -32768
+ori $t0, $t1, 32767
+add $t0, $t1, $t2
+addi $t0, $t1, -32768
+ori $t0, $t1, 32767
+add $t0, $t1, $t2
+addi $t0, $t1, -32768
+ori $t0, $t1, 32767
+add $t0, $t1, $t2
+addi $t0, $t1, -32768
 ori $t0, $t1, 32767</textarea>
             </div>
-            
+            <div class="scroll">
+                <div class="inner"></div>
+            </div>
             <div class="output cm-s-ambiance">
                 <table>
                     <tbody data-bind="foreach: commands">
                         <!--template for r-type commands-->
-                        <tr data-bind="visible: type() === 'rtype'" class="captions">
+                        <tr data-bind="visible: isRType()" class="captions">
                             <td>op</td>
                             <td>rs</td>
                             <td>rt</td>
@@ -32,7 +44,7 @@ ori $t0, $t1, 32767</textarea>
                             <td>shamt</td>
                             <td>funct</td>
                         </tr>
-                        <tr data-bind="visible: type() === 'rtype'" class="code">
+                        <tr data-bind="visible: isRType()" class="code">
                             <td data-bind="text: op"></td>
                             <td data-bind="text: rs"></td>
                             <td data-bind="text: rt"></td>
@@ -41,27 +53,30 @@ ori $t0, $t1, 32767</textarea>
                             <td data-bind="text: funct"></td>
                         </tr>
                         <!--template for i-type commands-->
-                        <tr data-bind="visible: type() === 'itype'" class="captions">
+                        <tr data-bind="visible: isIType()" class="captions">
                             <td>op</td>
                             <td>rs</td>
                             <td>rt</td>
                             <td colspan="3">imm</td>
                         </tr>
-                        <tr data-bind="visible: type() === 'itype'" class="code">
+                        <tr data-bind="visible: isIType()" class="code">
                             <td data-bind="text: op"></td>
                             <td data-bind="text: rs"></td>
                             <td data-bind="text: rt"></td>
                             <td data-bind="text: imm" colspan="3"></td>
                         </tr>
                         <!--template for j-type commands-->
-                        <tr data-bind="visible: type() === 'jtype'" class="captions">
+                        <tr data-bind="visible: isJType()" class="captions">
                             <td>op</td>
                             <td colspan="5">addr</td>
                         </tr>
-                        <tr data-bind="visible: type() === 'jtype'" class="code">
+                        <tr data-bind="visible: isJType()" class="code">
                             <td data-bind="text: op"></td>
                             <td data-bind="text: addr" colspan="5"></td>
                         </tr>
+                        <!--empty template-->
+                        <tr data-bind="visible: isEmpty()" class="captions"></tr>
+                        <tr data-bind="visible: isEmpty()" class="code"></tr>
                     </tbody>
                 </table>
             </div>

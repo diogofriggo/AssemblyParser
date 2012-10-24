@@ -36,7 +36,7 @@ body {
 
 .input, .output {
 	float: left;
-	width: 50%;
+	width: 49%;
 }
 
 .input {
@@ -47,11 +47,14 @@ body {
     box-shadow: 0 0 10px black inset, 0 0 15px rgba(0, 0, 0, 3), 0 0 15px rgba(0, 0, 0, 3);
     border-radius: 5px;
     height: 500px;
+    overflow-y: hidden;
 }
 
 .output table{
     margin: auto;
+    margin-bottom: 16px;
     width: 90%;
+    border-collapse: collapse;
 }
 
 .output table tr {
@@ -59,17 +62,21 @@ body {
     line-height: 1;
 }
 
+.captions{
+    height: 15px;
+}
+
 .code {
+    height: 25px;
     color: white;
     font-weight: bold;
     font-size: 20px;
     letter-spacing: 2px;
-    height: 31px;
 }
 
 .code td {    
-    border: 1px solid white;
-    padding: 1px;
+    outline: 1px solid white;
+    padding: 0;
 }
 
 .captions, .bits {    
@@ -77,16 +84,22 @@ body {
     font-size: 12px;
 }
 
-.bits td, .captions td{
-    padding: 0;
-    height: 12px;
-}
-
-.output hr {
-    margin: 0;   
-    padding: 0;
-}
-
 .CodeMirror-scroll.cm-s-ambiance {
-    line-height: 45px;
+    line-height: 40px;
 }
+
+.CodeMirror-lines, .CodeMirror-gutter-text {
+    padding: 6px 10px;
+}
+
+.CodeMirror-scroll, .CodeMirror-scrollbar {
+    overflow-y: hidden;
+}
+
+.scroll {
+    width: 22px;
+    float: left;
+    height: 500px;
+    overflow-y: auto;
+    position: relative;
+} 
