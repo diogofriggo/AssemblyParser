@@ -8,6 +8,7 @@
         <script src="../../Scripts/jquery-1.8.2.js" type="text/javascript"></script>
         <script src="../../Scripts/jquery.ba-resize.js" type="text/javascript"></script>
         <script src="../../Scripts/underscore.js" type="text/javascript"></script>
+        <script src="../../Scripts/underscore.string.js" type="text/javascript"></script>
         <script src="../../Scripts/knockout-2.1.0.debug.js" type="text/javascript"></script>
         <script src="../../Scripts/codemirror.js" type="text/javascript"></script>
         <script src="../../Scripts/assembly.js" type="text/javascript"></script>
@@ -16,18 +17,17 @@
     <body>
         <div id="content">
             <div class="input">
-                <textarea id="view" rows="0" cols="0">add $t0, $t1, $t2
+                <textarea id="view" rows="0" cols="0">j else
+addi $t0, $t1, -32768
+beq $t0, $t1, equal
+bne $t0, $t1, different
+#this command is not supposed to do anything
+else: add $t0, $t1, $t2
 addi $t0, $t1, -32768
 ori $t0, $t1, 32767
-add $t0, $t1, $t2
+equal: add $t0, $t1, $t2
 addi $t0, $t1, -32768
-ori $t0, $t1, 32767
-add $t0, $t1, $t2
-addi $t0, $t1, -32768
-ori $t0, $t1, 32767
-add $t0, $t1, $t2
-addi $t0, $t1, -32768
-ori $t0, $t1, 32767</textarea>
+different: ori $t0, $t1, 32767</textarea>
             </div>
             <div class="scroll">
                 <div class="inner"></div>

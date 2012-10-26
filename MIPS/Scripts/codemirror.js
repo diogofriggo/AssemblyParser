@@ -2313,7 +2313,8 @@ window.CodeMirror = (function() {
       var ch = this.string.charAt(this.pos);
       if (typeof match == "string") var ok = ch == match;
       else var ok = ch && (match.test ? match.test(ch) : match(ch));
-      if (ok) {++this.pos; return ch;}
+      if(ch === '') ok = true;
+	  if (ok) {++this.pos; return ch;}
     },
     eatWhile: function(match) {
       var start = this.pos;

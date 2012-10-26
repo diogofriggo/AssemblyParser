@@ -9,8 +9,8 @@ body {
 
 #content {
 	margin: auto;
-	margin-top: 10%;
-	width: 80%;
+	margin-top: 5%;
+	width: 90%;
 }
 
 .footer {
@@ -103,3 +103,8 @@ body {
     overflow-y: auto;
     position: relative;
 } 
+.cm-s-ambiance .cm-operator { color: #cda869; }
+.cm-s-ambiance .cm-register { color: #78CF8A; }
+.cm-s-ambiance .cm-comment { color: #555; font-style:italic; }
+.cm-s-ambiance .cm-number { color: #9999cc; }
+.cm-s-ambiance .cm-label { color: #CDAD00; font-style:italic; }
