@@ -1,4 +1,4 @@
-﻿var editor,
+var editor,
 	functions,
 	registers;
 
@@ -127,7 +127,7 @@ $(function() {
 		if(isBranchOp(op)) {
 			return getAddr(token);
 		}
-		return parseInt(token);
+		return toBin(parseInt(token));
 	}
 
 	function parseITypeCommand(tokens) {
@@ -150,13 +150,11 @@ $(function() {
 			}
 			else if(code.rs && code.rt) {
 				var immediate = getImmediate(op, token);
-				if(_.isNumber(immediate) && immediate >= MIN_16_BIT_SIGNED_VALUE && immediate <= MAX_16_BIT_UNSIGNED_VALUE) {
-					if(code.imm) {
-						console.error('Tried to reset code.imm for I-type');
-					}
-					else {
-						code.imm = immediate;
-					}
+				if(code.imm) {
+					console.error('Tried to reset code.imm for I-type');
+				}
+				else {
+					code.imm = immediate;
 				}
 			}
 		});
@@ -187,7 +185,7 @@ $(function() {
 		    lines = stripComments(stripLabels(text, label)).replace(labelRegex, label).split( /\n+/ ),
 		    sourceLineNumber = findLine(lines, label),
 		    destinationLineNumber = findLine(lines, _.sprintf('\\b%s\\b:', label));
-		return destinationLineNumber - sourceLineNumber;
+		return toBin(destinationLineNumber - sourceLineNumber);
 	}
 
 	function parseJTypeCommand(tokens) {
@@ -201,6 +199,33 @@ $(function() {
 		};
 	}
 	
+	function pad (str, max, char) {
+	  return str.length < max ? pad(char + str, max, char) : str;
+	}
+
+	function flip (str){
+		var i;
+		var newStr = '';
+		for(i = 0; i < str.length; i++){
+			newStr += str[i] === '1' ? 0 : 1;
+		}
+		return newStr;
+	}
+
+	function toBin(num){
+		if(num > MAX_16_BIT_UNSIGNED_VALUE || num < MIN_16_BIT_SIGNED_VALUE){
+			return console.error('out of range');
+		}
+		if(num >= 0){
+			return pad(num.toString(2), 16, '0');
+		}
+		var absolute = Math.abs(num).toString(2);
+		var padded = pad(absolute, 16, '0');
+		var flipped = flip(padded);    
+		var summed = parseInt(flipped, 2) + 1;
+		return summed.toString(2);
+	}
+
 	var Command = function(command){
 		var self = this;
 		self.op = ko.observable(command.op);
